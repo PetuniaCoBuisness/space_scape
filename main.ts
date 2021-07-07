@@ -5,7 +5,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (sorcer >= 10) {
         p1.startEffect(effects.halo, 100)
         sorcer += -10
-        info.changeScoreBy(10)
+        info.changeScoreBy(-10)
         projectile = sprites.createProjectileFromSprite(img`
             . . . . . b b b b b b . . . . . 
             . . . b b 9 9 9 9 9 9 b b . . . 
@@ -25,14 +25,43 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             . . . . . b b b b b b . . . . . 
             `, p1, 0, -50)
     }
+    if (sorcer >= 25) {
+        if ((controller.down.isPressed() && controller.up.isPressed()) == true) {
+            p1.startEffect(effects.halo, 100)
+            sorcer += -25
+            info.changeScoreBy(-25)
+            projectile = sprites.createProjectileFromSprite(img`
+                . . . . . b b b b b b . . . . . 
+                . . . b b 8 8 8 8 8 8 b b . . . 
+                . . b b 8 8 8 8 8 8 8 8 b b . . 
+                . b b 8 c 8 8 8 8 8 8 8 8 b b . 
+                . b 8 c 8 8 8 8 8 1 1 1 8 8 b . 
+                b 8 c c 8 8 8 8 8 1 1 1 8 8 8 b 
+                b 8 c 8 8 8 8 8 8 1 1 1 8 8 8 b 
+                b 8 2 8 8 8 8 8 8 8 8 8 1 8 8 b 
+                b 7 2 c 8 8 8 8 8 8 8 8 8 8 8 b 
+                b 7 2 2 8 8 8 8 8 8 8 8 8 c 8 b 
+                b 7 c 2 2 8 8 8 8 8 8 8 c c 8 b 
+                . b 7 2 2 2 c 8 8 8 8 c c 7 b . 
+                . b c 7 2 2 2 2 2 2 2 c 7 b b . 
+                . . b c 7 c 2 2 2 2 7 7 b b . . 
+                . . . b b 7 7 7 7 7 7 b b . . . 
+                . . . . . b b b b b b . . . . . 
+                `, p1, 0, -50)
+            projectile.follow(myEnemy, 5)
+        }
+    }
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    controller.moveSprite(p1, 100, 0)
     p1.startEffect(effects.rings, 100)
     info.changeScoreBy(1)
     sorcer += 1
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, otherSprite) {
+    info.changeScoreBy(10)
     counter += 1
+    projectile.destroy()
     myEnemy.y += -10
     pause(100)
     myEnemy.y += -5
@@ -44,6 +73,7 @@ sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Projectile, function (sprite, oth
 })
 sprites.onOverlap(SpriteKind.Enemy, SpriteKind.Player, function (sprite, otherSprite) {
     info.changeLifeBy(-1)
+    info.changeScoreBy(-50)
     myEnemy.setPosition(74, 45)
     myEnemy.follow(p1, 1)
     myEnemy.follow(p1, 1)
@@ -58,6 +88,7 @@ controller.A.onEvent(ControllerButtonEvent.Repeated, function () {
         info.changeScoreBy(1)
         sorcer += 1
     }
+    controller.moveSprite(p1, 200, 40)
 })
 let projectile: Sprite = null
 let myEnemy: Sprite = null
@@ -67,7 +98,7 @@ let counter = 0
 info.setLife(3)
 counter = 1
 sorcer = 0
-info.setScore(0)
+info.setScore(sorcer)
 p1 = sprites.create(img`
     . . . . . . . . . . . . . . . . 
     . . . . . . 6 6 6 6 . . . . . . 
@@ -234,3 +265,8 @@ p1.setPosition(78, 100)
 p1.setKind(SpriteKind.Player)
 controller.moveSprite(p1, 100, 0)
 myEnemy.follow(p1, 1)
+forever(function () {
+    pause(randint(1, 100000))
+    myEnemy.x += randint(-100, 100)
+    myEnemy.y += randint(-100, 100)
+})
