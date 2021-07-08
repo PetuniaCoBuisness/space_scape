@@ -95,6 +95,99 @@ let myEnemy: Sprite = null
 let p1: Sprite = null
 let sorcer = 0
 let counter = 0
+game.setDialogTextColor(1)
+game.setDialogFrame(img`
+    ..................................................................
+    ....33.......33...........dddd............dddd............aaa.....
+    ...a533.....393....dddddddffffd....dddddddffffd....3333...a35a....
+    ...a553aaa339993.ddffffddffffffddddffffddffffffdd.39393aaa3553aa..
+    ..a355555a3999993dff9fffffffffffddff9fffffffffffd339993a555555553.
+    .a555555333399933ff999fffffffffffff999fffffffffff3999993a55555533.
+    .a35555533339393ffff9fffffff55ffffff9fffffff55ffff399933a3555533..
+    .aa355555af3333fffffffffffff55ffffffffffffff55ffff33933fa55555a...
+    ...a55355afffffffffffffffffffffffffffffffffffffffff333ffa55335a...
+    ...a5aaaaafffff9ffffffffffffffffffffffffffffffffffffffffaaa33aa...
+    ...aa33ffff55fffffffffffffffffffffffffffffffffffff9ffffffff3333...
+    ..333933fff55fffffffffffffffffffffffffffffffffffffffff55ff33393...
+    ..3999933fffffffffffffffffffffffffffffffffffffffffffff55ff399993..
+    ..3399993fffffffffffffffffffffffffffffffffffffffffffffffff3399993.
+    ..3999933fffffffffffffffffffffffffffffffffffffffffffffffff3999933.
+    ...33933ff9fffffffffffffffffffffffffffffffffffffffffffff9ff3393...
+    ....33ffffffffffffffffffffffffffffffffffffffffffffffffffffff33....
+    ...ddffffffffffffffffffffffffffffffffffffffffffffffffffffffffdd...
+    ...dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd...
+    ..dfffffffffffffffffffffffffffffffffffffffffffffffffffffffff9ffd..
+    .dffff55fffffffffffffffffffffffffffffffffffffffffffffffffff999fd..
+    .dffff55ffffffffffffffffffffffffffffffffffffffffffffffffffff9ffd..
+    .dfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd..
+    .dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdd..
+    ..dfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdd..
+    ..ddfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd..
+    ..ddffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd.
+    ..dfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd.
+    ..dff9ffffffffffffffffffffffffffffffffffffffffffffffffffff55ffffd.
+    ..df999fffffffffffffffffffffffffffffffffffffffffffffffffff55ffffd.
+    ..dff9fffffffffffffffffffffffffffffffffffffffffffffffffffffffffd..
+    ...dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd...
+    ...ddffffffffffffffffffffffffffffffffffffffffffffffffffffffffdd...
+    ...ddffffffffffffffffffffffffffffffffffffffffffffffffffffffffdd...
+    ...dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd...
+    ..dfffffffffffffffffffffffffffffffffffffffffffffffffffffffff9ffd..
+    .dffff55fffffffffffffffffffffffffffffffffffffffffffffffffff999fd..
+    .dffff55ffffffffffffffffffffffffffffffffffffffffffffffffffff9ffd..
+    .dfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd..
+    .dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdd..
+    ..dfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffdd..
+    ..ddfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd..
+    ..ddffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd.
+    ..dfffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd.
+    ..dff9ffffffffffffffffffffffffffffffffffffffffffffffffffff55ffffd.
+    ..df999fffffffffffffffffffffffffffffffffffffffffffffffffff55ffffd.
+    ..dff9fffffffffffffffffffffffffffffffffffffffffffffffffffffffffd..
+    ...dffffffffffffffffffffffffffffffffffffffffffffffffffffffffffd...
+    ...ddffffffffffffffffffffffffffffffffffffffffffffffffffffffffdd...
+    ....33ffffffffffffffffffffffffffffffffffffffffffffffffffffff33....
+    ...3933ff9fffffffffffffffffffffffffffffffffffffffffffff9ff33933...
+    .3399993fffffffffffffffffffffffffffffffffffffffffffffffff3399993..
+    .3999933fffffffffffffffffffffffffffffffffffffffffffffffff3999933..
+    ..399993ff55fffffffffffffffffffffffffffffffffffffffffffff3399993..
+    ...39333ff55fffffffffffffffffffffffffffffffffffffffff55fff339333..
+    ...3333ffffffff9fffffffffffffffffffffffffffffffffffff55ffff33aa...
+    ...aa33aaaffffffffffffffffffffffffffffffffffffffff9fffffaaaaa5a...
+    ...a53355aff333fffffffffffffffffffffffffffffffffffffffffa55355a...
+    ...a55555af33933ffff55ffffffffffffff55fffffffffffff3333fa555553aa.
+    ..3355553a339993ffff55fffffff9ffffff55fffffff9ffff39393333555553a.
+    .33555555a3999993fffffffffff999fffffffffffff999ff339993333555555a.
+    .355555555a399933dfffffffffff9ffddfffffffffff9ffd3999993a555553a..
+    ..aa3553aaa39393.ddffffffddffffddddffffffddffffdd.399933aaa355a...
+    ....a53a...3333....dffffddddddd....dffffddddddd....393.....335a...
+    .....aaa............dddd............dddd...........33.......33....
+    ..................................................................
+    `)
+game.setDialogCursor(img`
+    . . . . . . . . . . . . . . . . 
+    . . . . . . 6 6 6 6 . . . . . . 
+    . . . . 6 6 6 5 5 6 6 6 . . . . 
+    . . . 6 7 7 7 6 6 6 6 6 6 . . . 
+    . . 6 7 7 7 7 8 8 8 1 1 6 6 . . 
+    . . 6 7 7 7 7 8 8 8 1 1 5 6 . . 
+    . 6 7 7 7 7 8 8 8 8 8 5 5 6 6 . 
+    . 6 7 7 7 8 8 8 6 6 6 6 5 6 6 . 
+    . 6 6 7 7 8 8 6 6 6 6 6 6 6 6 . 
+    . 6 8 7 7 8 8 6 6 6 6 6 6 6 6 . 
+    . . 6 8 7 7 8 6 6 6 6 6 8 6 . . 
+    . . 6 8 8 7 8 8 6 6 6 8 6 6 . . 
+    . . . 6 8 8 8 8 8 8 8 8 6 . . . 
+    . . . . 6 6 8 8 8 8 6 6 . . . . 
+    . . . . . . 6 6 6 6 . . . . . . 
+    . . . . . . . . . . . . . . . . 
+    `)
+game.showLongText("On a very far galaxy...", DialogLayout.Top)
+game.showLongText("...a battle was about to begin.", DialogLayout.Top)
+game.splash("Charge With \"A\"")
+game.splash("Shoot With \"B\"")
+game.splash("Scape from Red one")
+game.splash("Good luck!")
 info.setLife(3)
 counter = 1
 sorcer = 0
@@ -269,4 +362,8 @@ forever(function () {
     pause(randint(1, 100000))
     myEnemy.x += randint(-100, 100)
     myEnemy.y += randint(-100, 100)
+})
+forever(function () {
+    music.playMelody("C E D C F E D C ", 100)
+    pause(100)
 })
