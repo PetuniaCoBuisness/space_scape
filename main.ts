@@ -25,31 +25,33 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             . . . . . b b b b b b . . . . . 
             `, p1, 0, -50)
     }
-    if (sorcer >= 25) {
-        if ((controller.down.isPressed() && controller.up.isPressed()) == true) {
-            p1.startEffect(effects.halo, 100)
-            sorcer += -25
-            info.changeScoreBy(-25)
-            projectile = sprites.createProjectileFromSprite(img`
-                . . . . . b b b b b b . . . . . 
-                . . . b b 8 8 8 8 8 8 b b . . . 
-                . . b b 8 8 8 8 8 8 8 8 b b . . 
-                . b b 8 c 8 8 8 8 8 8 8 8 b b . 
-                . b 8 c 8 8 8 8 8 1 1 1 8 8 b . 
-                b 8 c c 8 8 8 8 8 1 1 1 8 8 8 b 
-                b 8 c 8 8 8 8 8 8 1 1 1 8 8 8 b 
-                b 8 2 8 8 8 8 8 8 8 8 8 1 8 8 b 
-                b 7 2 c 8 8 8 8 8 8 8 8 8 8 8 b 
-                b 7 2 2 8 8 8 8 8 8 8 8 8 c 8 b 
-                b 7 c 2 2 8 8 8 8 8 8 8 c c 8 b 
-                . b 7 2 2 2 c 8 8 8 8 c c 7 b . 
-                . b c 7 2 2 2 2 2 2 2 c 7 b b . 
-                . . b c 7 c 2 2 2 2 7 7 b b . . 
-                . . . b b 7 7 7 7 7 7 b b . . . 
-                . . . . . b b b b b b . . . . . 
-                `, p1, 0, -50)
-            projectile.follow(myEnemy, 5)
-        }
+    if ((controller.down.isPressed() && controller.up.isPressed()) == true && sorcer >= 25) {
+        p1.startEffect(effects.halo, 100)
+        sorcer += -25
+        info.changeScoreBy(-25)
+        projectile = sprites.createProjectileFromSprite(img`
+            . . . . . b b b b b b . . . . . 
+            . . . b b 8 8 8 8 8 8 b b . . . 
+            . . b b 8 8 8 8 8 8 8 8 b b . . 
+            . b b 8 c 8 8 8 8 8 8 8 8 b b . 
+            . b 8 c 8 8 8 8 8 1 1 1 8 8 b . 
+            b 8 c c 8 8 8 8 8 1 1 1 8 8 8 b 
+            b 8 c 8 8 8 8 8 8 1 1 1 8 8 8 b 
+            b 8 2 8 8 8 8 8 8 8 8 8 1 8 8 b 
+            b 7 2 c 8 8 8 8 8 8 8 8 8 8 8 b 
+            b 7 2 2 8 8 8 8 8 8 8 8 8 c 8 b 
+            b 7 c 2 2 8 8 8 8 8 8 8 c c 8 b 
+            . b 7 2 2 2 c 8 8 8 8 c c 7 b . 
+            . b c 7 2 2 2 2 2 2 2 c 7 b b . 
+            . . b c 7 c 2 2 2 2 7 7 b b . . 
+            . . . b b 7 7 7 7 7 7 b b . . . 
+            . . . . . b b b b b b . . . . . 
+            `, p1, 0, -50)
+        projectile.follow(myEnemy, 5)
+    } else {
+        p1.say("NOT ENOUGH CHARGE")
+        pause(2000)
+        p1.say("tRY AGAIN WITH MORE CHARGE LATER!")
     }
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
