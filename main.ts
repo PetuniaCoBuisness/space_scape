@@ -49,9 +49,11 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
             `, p1, 0, -50)
         projectile.follow(myEnemy, 5)
     } else {
-        p1.say("NOT ENOUGH CHARGE")
-        pause(2000)
-        p1.say("tRY AGAIN WITH MORE CHARGE LATER!")
+        if (sorcer < 25) {
+            p1.say("NOT ENOUGH CHARGE")
+            pause(1000)
+            p1.say("tRY AGAIN WITH MORE CHARGE LATER!")
+        }
     }
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
